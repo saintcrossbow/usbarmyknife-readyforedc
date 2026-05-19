@@ -1,0 +1,64 @@
+REM Startup standard run for device
+REM On startup have WiFi and web client
+REM Press long to cycle options, press short to activate
+
+DEFINE #FILE /usbrun
+DEFINE #SETTING_NAME usbDeviceType
+VAR $SETTING_USB_DEVICE_TYPE_ETHERNET = 2
+
+TFT_OFF
+LED_OFF
+TFT_ON
+
+IF (FILE_EXISTS() == FALSE) THEN
+
+ATTACKMODE OFF
+WIFI_ON
+DISPLAY_PNG /ap.png
+WAIT_FOR_BUTTON_PRESS
+IF (BUTTON_LONG_PRESS()) THEN
+    DISPLAY_PNG /beacon.png
+	WAIT_FOR_BUTTON_PRESS
+    IF (BUTTON_LONG_PRESS()) THEN
+         DISPLAY_PNG /wifiattack.png
+		 WAIT_FOR_BUTTON_PRESS
+	     IF (BUTTON_LONG_PRESS()) THEN
+             DISPLAY_PNG /pcap.png
+	         WAIT_FOR_BUTTON_PRESS
+	         IF (BUTTON_LONG_PRESS()) THEN
+	           DISPLAY_PNG /mountusb.png
+	           WAIT_FOR_BUTTON_PRESS
+	           DISPLAY_PNG /ready.png
+			   ATTACKMODE STORAGE
+             ELSE
+		       CREATE_FILE()
+			   SET_SETTING_UINT16 usbDeviceType $SETTING_USB_DEVICE_TYPE_ETHERNET
+    	       RESET
+			 END_IF
+		 ELSE
+			 RUN_PAYLOAD /wifi_attack.ds
+		 END_IF
+	ELSE
+	     RUN_PAYLOAD /beacon_spam.ds
+	END_IF
+ELSE
+     TFT_ON
+     DISPLAY_PNG /swiss.png
+END_IF
+
+ELSE
+  DELETE_FILE()
+  USB_NCM_PCAP_ON
+  DISPLAY_PNG /1.png
+  DELAY 5000
+  DISPLAY_PNG /2.png
+  DELAY 5000
+  DISPLAY_PNG /3.png
+  DELAY 5000
+  DISPLAY_PNG /4.png
+  DELAY 5000
+  USB_NCM_PCAP_OFF
+  DISPLAY_PNG /barcomplete.png
+  DELAY 1000
+  RESET
+END_IF

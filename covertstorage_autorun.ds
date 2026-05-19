@@ -1,0 +1,33 @@
+REM Turn these on for debugging
+WIFI_OFF
+TFT_OFF
+LED_OFF
+
+REM The internal functions FILE_EXISTS() and CREATE_FILE()
+REM both require a constant called #FILE to be set
+
+DEFINE #FILE /firstrun
+
+IF (FILE_EXISTS() == FALSE) THEN
+  REM If a file doesn't exist create first run file
+  REM and mount the whole disk
+  CREATE_FILE()
+  TFT_ON
+  DISPLAY_PNG /covert.png
+  ATTACKMODE STORAGE
+ELSE
+  ATTACKMODE OFF
+  TFT_ON
+  DISPLAY_CLEAR
+  DISPLAY_TEXT 0 0 [-- USB Port Active--]
+  WHILE (TRUE)
+    DISPLAY_TEXT 0 20 5.0 voltage on USB
+	DELAY 2000
+	DISPLAY_TEXT 0 20 4.9 voltage on USB
+	DELAY 500
+    DISPLAY_TEXT 0 20 5.0 voltage on USB
+	DELAY 3000
+	DISPLAY_TEXT 0 20 4.9 voltage on USB
+	DELAY 300	
+  END_WHILE
+END_IF
