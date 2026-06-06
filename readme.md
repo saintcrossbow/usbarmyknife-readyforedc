@@ -4,7 +4,7 @@ My implementation of https://github.com/i-am-shodan/USBArmyKnife
 
 I am obsessed with EDC and really wanted a useful, small, InfoSec based EDC device. I've tried this before with mixed success; see https://github.com/saintcrossbow/USB-Swiss-Armory-Knife
 
-The USB Army Knife however is excellent and has great examples that could be used in an EDC scenario. However, when using the default scripts, you have to change payloads on the SD card or through the AP. I wanted something that I could use without another device. So this is a remix of some of the examples, with now just two basic scripts, and a little more graphics. 
+The USB Army Knife  is excellent and has great examples that could be used in an EDC scenario. When using the default scripts, you have to change payloads on the SD card or through the AP. I wanted something that I could use without another device. So this is a remix of some of the examples, with now just two basic scripts, and a little more graphics. 
 
 So friends, I give you my real EDC, with real hollywood style and useful tools accessible by a click. Your friend - the Saint himself - carries it daily! 
 
